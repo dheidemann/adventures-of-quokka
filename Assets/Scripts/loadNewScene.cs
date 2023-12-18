@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class loadNewScene : MonoBehaviour
 {
     private GameObject player;
+    public string nextScene;
 
     void Start()
     {
@@ -17,7 +18,7 @@ public class loadNewScene : MonoBehaviour
     {
         if(collision.gameObject.name == "player")
         {
-            SceneManager.LoadSceneAsync("intro_02");
+            SceneManager.LoadSceneAsync(nextScene);
         }
     }
 }
