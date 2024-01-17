@@ -5,14 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class loadNewScene : MonoBehaviour
 {
-    private GameObject player;
     public string nextScene;
-
-    void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -20,5 +13,6 @@ public class loadNewScene : MonoBehaviour
         {
             SceneManager.LoadSceneAsync(nextScene);
         }
+        
     }
 }

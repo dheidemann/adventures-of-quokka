@@ -1,96 +1,96 @@
-Shader stats.TextMeshPro/Distance Field Overlaystats. {
+Shader "TextMeshPro/Distance Field Overlay" {
 
 Properties {
-	_FaceTex			(stats.Face Texturestats., 2D) = stats.whitestats. {}
-	_FaceUVSpeedX		(stats.Face UV Speed Xstats., Range(-5, 5)) = 0.0
-	_FaceUVSpeedY		(stats.Face UV Speed Ystats., Range(-5, 5)) = 0.0
-	[HDR]_FaceColor		(stats.Face Colorstats., Color) = (1,1,1,1)
-	_FaceDilate			(stats.Face Dilatestats., Range(-1,1)) = 0
+	_FaceTex			("Face Texture", 2D) = "white" {}
+	_FaceUVSpeedX		("Face UV Speed X", Range(-5, 5)) = 0.0
+	_FaceUVSpeedY		("Face UV Speed Y", Range(-5, 5)) = 0.0
+	[HDR]_FaceColor		("Face Color", Color) = (1,1,1,1)
+	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
 
-	[HDR]_OutlineColor	(stats.Outline Colorstats., Color) = (0,0,0,1)
-	_OutlineTex			(stats.Outline Texturestats., 2D) = stats.whitestats. {}
-	_OutlineUVSpeedX	(stats.Outline UV Speed Xstats., Range(-5, 5)) = 0.0
-	_OutlineUVSpeedY	(stats.Outline UV Speed Ystats., Range(-5, 5)) = 0.0
-	_OutlineWidth		(stats.Outline Thicknessstats., Range(0, 1)) = 0
-	_OutlineSoftness	(stats.Outline Softnessstats., Range(0,1)) = 0
+	[HDR]_OutlineColor	("Outline Color", Color) = (0,0,0,1)
+	_OutlineTex			("Outline Texture", 2D) = "white" {}
+	_OutlineUVSpeedX	("Outline UV Speed X", Range(-5, 5)) = 0.0
+	_OutlineUVSpeedY	("Outline UV Speed Y", Range(-5, 5)) = 0.0
+	_OutlineWidth		("Outline Thickness", Range(0, 1)) = 0
+	_OutlineSoftness	("Outline Softness", Range(0,1)) = 0
 
-	_Bevel				(stats.Bevelstats., Range(0,1)) = 0.5
-	_BevelOffset		(stats.Bevel Offsetstats., Range(-0.5,0.5)) = 0
-	_BevelWidth			(stats.Bevel Widthstats., Range(-.5,0.5)) = 0
-	_BevelClamp			(stats.Bevel Clampstats., Range(0,1)) = 0
-	_BevelRoundness		(stats.Bevel Roundnessstats., Range(0,1)) = 0
+	_Bevel				("Bevel", Range(0,1)) = 0.5
+	_BevelOffset		("Bevel Offset", Range(-0.5,0.5)) = 0
+	_BevelWidth			("Bevel Width", Range(-.5,0.5)) = 0
+	_BevelClamp			("Bevel Clamp", Range(0,1)) = 0
+	_BevelRoundness		("Bevel Roundness", Range(0,1)) = 0
 
-	_LightAngle			(stats.Light Anglestats., Range(0.0, 6.2831853)) = 3.1416
-	[HDR]_SpecularColor	(stats.Specularstats., Color) = (1,1,1,1)
-	_SpecularPower		(stats.Specularstats., Range(0,4)) = 2.0
-	_Reflectivity		(stats.Reflectivitystats., Range(5.0,15.0)) = 10
-	_Diffuse			(stats.Diffusestats., Range(0,1)) = 0.5
-	_Ambient			(stats.Ambientstats., Range(1,0)) = 0.5
+	_LightAngle			("Light Angle", Range(0.0, 6.2831853)) = 3.1416
+	[HDR]_SpecularColor	("Specular", Color) = (1,1,1,1)
+	_SpecularPower		("Specular", Range(0,4)) = 2.0
+	_Reflectivity		("Reflectivity", Range(5.0,15.0)) = 10
+	_Diffuse			("Diffuse", Range(0,1)) = 0.5
+	_Ambient			("Ambient", Range(1,0)) = 0.5
 
-	_BumpMap 			(stats.Normal mapstats., 2D) = stats.bumpstats. {}
-	_BumpOutline		(stats.Bump Outlinestats., Range(0,1)) = 0
-	_BumpFace			(stats.Bump Facestats., Range(0,1)) = 0
+	_BumpMap 			("Normal map", 2D) = "bump" {}
+	_BumpOutline		("Bump Outline", Range(0,1)) = 0
+	_BumpFace			("Bump Face", Range(0,1)) = 0
 
-	_ReflectFaceColor	(stats.Reflection Colorstats., Color) = (0,0,0,1)
-	_ReflectOutlineColor(stats.Reflection Colorstats., Color) = (0,0,0,1)
-	_Cube 				(stats.Reflection Cubemapstats., Cube) = stats.blackstats. { /* TexGen CubeReflect */ }
-	_EnvMatrixRotation	(stats.Texture Rotationstats., vector) = (0, 0, 0, 0)
+	_ReflectFaceColor	("Reflection Color", Color) = (0,0,0,1)
+	_ReflectOutlineColor("Reflection Color", Color) = (0,0,0,1)
+	_Cube 				("Reflection Cubemap", Cube) = "black" { /* TexGen CubeReflect */ }
+	_EnvMatrixRotation	("Texture Rotation", vector) = (0, 0, 0, 0)
 
 
-	[HDR]_UnderlayColor	(stats.Border Colorstats., Color) = (0,0,0, 0.5)
-	_UnderlayOffsetX	(stats.Border OffsetXstats., Range(-1,1)) = 0
-	_UnderlayOffsetY	(stats.Border OffsetYstats., Range(-1,1)) = 0
-	_UnderlayDilate		(stats.Border Dilatestats., Range(-1,1)) = 0
-	_UnderlaySoftness	(stats.Border Softnessstats., Range(0,1)) = 0
+	[HDR]_UnderlayColor	("Border Color", Color) = (0,0,0, 0.5)
+	_UnderlayOffsetX	("Border OffsetX", Range(-1,1)) = 0
+	_UnderlayOffsetY	("Border OffsetY", Range(-1,1)) = 0
+	_UnderlayDilate		("Border Dilate", Range(-1,1)) = 0
+	_UnderlaySoftness	("Border Softness", Range(0,1)) = 0
 
-	[HDR]_GlowColor		(stats.Colorstats., Color) = (0, 1, 0, 0.5)
-	_GlowOffset			(stats.Offsetstats., Range(-1,1)) = 0
-	_GlowInner			(stats.Innerstats., Range(0,1)) = 0.05
-	_GlowOuter			(stats.Outerstats., Range(0,1)) = 0.05
-	_GlowPower			(stats.Falloffstats., Range(1, 0)) = 0.75
+	[HDR]_GlowColor		("Color", Color) = (0, 1, 0, 0.5)
+	_GlowOffset			("Offset", Range(-1,1)) = 0
+	_GlowInner			("Inner", Range(0,1)) = 0.05
+	_GlowOuter			("Outer", Range(0,1)) = 0.05
+	_GlowPower			("Falloff", Range(1, 0)) = 0.75
 
-	_WeightNormal		(stats.Weight Normalstats., float) = 0
-	_WeightBold			(stats.Weight Boldstats., float) = 0.5
+	_WeightNormal		("Weight Normal", float) = 0
+	_WeightBold			("Weight Bold", float) = 0.5
 
-	_ShaderFlags		(stats.Flagsstats., float) = 0
-	_ScaleRatioA		(stats.Scale RatioAstats., float) = 1
-	_ScaleRatioB		(stats.Scale RatioBstats., float) = 1
-	_ScaleRatioC		(stats.Scale RatioCstats., float) = 1
+	_ShaderFlags		("Flags", float) = 0
+	_ScaleRatioA		("Scale RatioA", float) = 1
+	_ScaleRatioB		("Scale RatioB", float) = 1
+	_ScaleRatioC		("Scale RatioC", float) = 1
 
-	_MainTex			(stats.Font Atlasstats., 2D) = stats.whitestats. {}
-	_TextureWidth		(stats.Texture Widthstats., float) = 512
-	_TextureHeight		(stats.Texture Heightstats., float) = 512
-	_GradientScale		(stats.Gradient Scalestats., float) = 5.0
-	_ScaleX				(stats.Scale Xstats., float) = 1.0
-	_ScaleY				(stats.Scale Ystats., float) = 1.0
-	_PerspectiveFilter	(stats.Perspective Correctionstats., Range(0, 1)) = 0.875
-	_Sharpness			(stats.Sharpnessstats., Range(-1,1)) = 0
+	_MainTex			("Font Atlas", 2D) = "white" {}
+	_TextureWidth		("Texture Width", float) = 512
+	_TextureHeight		("Texture Height", float) = 512
+	_GradientScale		("Gradient Scale", float) = 5.0
+	_ScaleX				("Scale X", float) = 1.0
+	_ScaleY				("Scale Y", float) = 1.0
+	_PerspectiveFilter	("Perspective Correction", Range(0, 1)) = 0.875
+	_Sharpness			("Sharpness", Range(-1,1)) = 0
 
-	_VertexOffsetX		(stats.Vertex OffsetXstats., float) = 0
-	_VertexOffsetY		(stats.Vertex OffsetYstats., float) = 0
+	_VertexOffsetX		("Vertex OffsetX", float) = 0
+	_VertexOffsetY		("Vertex OffsetY", float) = 0
 
-	_MaskCoord			(stats.Mask Coordinatesstats., vector) = (0, 0, 32767, 32767)
-	_ClipRect			(stats.Clip Rectstats., vector) = (-32767, -32767, 32767, 32767)
-	_MaskSoftnessX		(stats.Mask SoftnessXstats., float) = 0
-	_MaskSoftnessY		(stats.Mask SoftnessYstats., float) = 0
+	_MaskCoord			("Mask Coordinates", vector) = (0, 0, 32767, 32767)
+	_ClipRect			("Clip Rect", vector) = (-32767, -32767, 32767, 32767)
+	_MaskSoftnessX		("Mask SoftnessX", float) = 0
+	_MaskSoftnessY		("Mask SoftnessY", float) = 0
 
-	_StencilComp		(stats.Stencil Comparisonstats., Float) = 8
-	_Stencil			(stats.Stencil IDstats., Float) = 0
-	_StencilOp			(stats.Stencil Operationstats., Float) = 0
-	_StencilWriteMask	(stats.Stencil Write Maskstats., Float) = 255
-	_StencilReadMask	(stats.Stencil Read Maskstats., Float) = 255
+	_StencilComp		("Stencil Comparison", Float) = 8
+	_Stencil			("Stencil ID", Float) = 0
+	_StencilOp			("Stencil Operation", Float) = 0
+	_StencilWriteMask	("Stencil Write Mask", Float) = 255
+	_StencilReadMask	("Stencil Read Mask", Float) = 255
 
-	_CullMode			(stats.Cull Modestats., Float) = 0
-	_ColorMask			(stats.Color Maskstats., Float) = 15
+	_CullMode			("Cull Mode", Float) = 0
+	_ColorMask			("Color Mask", Float) = 15
 }
 
 SubShader {
 
 	Tags
   {
-		stats.Queuestats.=stats.Overlaystats.
-		stats.IgnoreProjectorstats.=stats.Truestats.
-		stats.RenderTypestats.=stats.Transparentstats.
+		"Queue"="Overlay"
+		"IgnoreProjector"="True"
+		"RenderType"="Transparent"
 	}
 
 	Stencil
@@ -122,10 +122,10 @@ SubShader {
 		#pragma multi_compile __ UNITY_UI_CLIP_RECT
 		#pragma multi_compile __ UNITY_UI_ALPHACLIP
 
-		#include stats.UnityCG.cgincstats.
-		#include stats.UnityUI.cgincstats.
-		#include stats.TMPro_Properties.cgincstats.
-		#include stats.TMPro.cgincstats.
+		#include "UnityCG.cginc"
+		#include "UnityUI.cginc"
+		#include "TMPro_Properties.cginc"
+		#include "TMPro.cginc"
 
 		struct vertex_t {
 			UNITY_VERTEX_INPUT_INSTANCE_ID
@@ -312,6 +312,6 @@ SubShader {
 	}
 }
 
-Fallback stats.TextMeshPro/Mobile/Distance Fieldstats.
-CustomEditor stats.TMPro.EditorUtilities.TMP_SDFShaderGUIstats.
+Fallback "TextMeshPro/Mobile/Distance Field"
+CustomEditor "TMPro.EditorUtilities.TMP_SDFShaderGUI"
 }
