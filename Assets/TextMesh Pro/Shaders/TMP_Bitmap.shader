@@ -1,30 +1,30 @@
-Shader "TextMeshPro/Bitmap" {
+Shader stats.TextMeshPro/Bitmapstats. {
 
 Properties {
-	_MainTex		("Font Atlas", 2D) = "white" {}
-	_FaceTex		("Font Texture", 2D) = "white" {}
-	[HDR]_FaceColor	("Text Color", Color) = (1,1,1,1)
+	_MainTex		(stats.Font Atlasstats., 2D) = stats.whitestats. {}
+	_FaceTex		(stats.Font Texturestats., 2D) = stats.whitestats. {}
+	[HDR]_FaceColor	(stats.Text Colorstats., Color) = (1,1,1,1)
 
-	_VertexOffsetX	("Vertex OffsetX", float) = 0
-	_VertexOffsetY	("Vertex OffsetY", float) = 0
-	_MaskSoftnessX	("Mask SoftnessX", float) = 0
-	_MaskSoftnessY	("Mask SoftnessY", float) = 0
+	_VertexOffsetX	(stats.Vertex OffsetXstats., float) = 0
+	_VertexOffsetY	(stats.Vertex OffsetYstats., float) = 0
+	_MaskSoftnessX	(stats.Mask SoftnessXstats., float) = 0
+	_MaskSoftnessY	(stats.Mask SoftnessYstats., float) = 0
 
-	_ClipRect("Clip Rect", vector) = (-32767, -32767, 32767, 32767)
+	_ClipRect(stats.Clip Rectstats., vector) = (-32767, -32767, 32767, 32767)
 
-	_StencilComp("Stencil Comparison", Float) = 8
-	_Stencil("Stencil ID", Float) = 0
-	_StencilOp("Stencil Operation", Float) = 0
-	_StencilWriteMask("Stencil Write Mask", Float) = 255
-	_StencilReadMask("Stencil Read Mask", Float) = 255
+	_StencilComp(stats.Stencil Comparisonstats., Float) = 8
+	_Stencil(stats.Stencil IDstats., Float) = 0
+	_StencilOp(stats.Stencil Operationstats., Float) = 0
+	_StencilWriteMask(stats.Stencil Write Maskstats., Float) = 255
+	_StencilReadMask(stats.Stencil Read Maskstats., Float) = 255
 
-	_CullMode("Cull Mode", Float) = 0
-	_ColorMask("Color Mask", Float) = 15
+	_CullMode(stats.Cull Modestats., Float) = 0
+	_ColorMask(stats.Color Maskstats., Float) = 15
 }
 
 SubShader{
 
-	Tags { "Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent" }
+	Tags { stats.Queuestats. = stats.Transparentstats. stats.IgnoreProjectorstats. = stats.Truestats. stats.RenderTypestats. = stats.Transparentstats. }
 
 	Stencil
 	{
@@ -53,7 +53,7 @@ SubShader{
 		#pragma multi_compile __ UNITY_UI_ALPHACLIP
 
 
-		#include "UnityCG.cginc"
+		#include stats.UnityCG.cgincstats.
 
 		struct appdata_t {
 			float4 vertex		: POSITION;
@@ -139,5 +139,5 @@ SubShader{
 	}
 }
 
-	CustomEditor "TMPro.EditorUtilities.TMP_BitmapShaderGUI"
+	CustomEditor stats.TMPro.EditorUtilities.TMP_BitmapShaderGUIstats.
 }

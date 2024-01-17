@@ -1,73 +1,73 @@
-Shader "TextMeshPro/Distance Field (Surface)" {
+Shader stats.TextMeshPro/Distance Field (Surface)stats. {
 
 Properties {
-	_FaceTex			("Fill Texture", 2D) = "white" {}
-	_FaceUVSpeedX		("Face UV Speed X", Range(-5, 5)) = 0.0
-	_FaceUVSpeedY		("Face UV Speed Y", Range(-5, 5)) = 0.0
-	[HDR]_FaceColor		("Fill Color", Color) = (1,1,1,1)
-	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
+	_FaceTex			(stats.Fill Texturestats., 2D) = stats.whitestats. {}
+	_FaceUVSpeedX		(stats.Face UV Speed Xstats., Range(-5, 5)) = 0.0
+	_FaceUVSpeedY		(stats.Face UV Speed Ystats., Range(-5, 5)) = 0.0
+	[HDR]_FaceColor		(stats.Fill Colorstats., Color) = (1,1,1,1)
+	_FaceDilate			(stats.Face Dilatestats., Range(-1,1)) = 0
 
-	[HDR]_OutlineColor	("Outline Color", Color) = (0,0,0,1)
-	_OutlineTex			("Outline Texture", 2D) = "white" {}
-	_OutlineUVSpeedX	("Outline UV Speed X", Range(-5, 5)) = 0.0
-	_OutlineUVSpeedY	("Outline UV Speed Y", Range(-5, 5)) = 0.0
-	_OutlineWidth		("Outline Thickness", Range(0, 1)) = 0
-	_OutlineSoftness	("Outline Softness", Range(0,1)) = 0
+	[HDR]_OutlineColor	(stats.Outline Colorstats., Color) = (0,0,0,1)
+	_OutlineTex			(stats.Outline Texturestats., 2D) = stats.whitestats. {}
+	_OutlineUVSpeedX	(stats.Outline UV Speed Xstats., Range(-5, 5)) = 0.0
+	_OutlineUVSpeedY	(stats.Outline UV Speed Ystats., Range(-5, 5)) = 0.0
+	_OutlineWidth		(stats.Outline Thicknessstats., Range(0, 1)) = 0
+	_OutlineSoftness	(stats.Outline Softnessstats., Range(0,1)) = 0
 
-	_Bevel				("Bevel", Range(0,1)) = 0.5
-	_BevelOffset		("Bevel Offset", Range(-0.5,0.5)) = 0
-	_BevelWidth			("Bevel Width", Range(-.5,0.5)) = 0
-	_BevelClamp			("Bevel Clamp", Range(0,1)) = 0
-	_BevelRoundness		("Bevel Roundness", Range(0,1)) = 0
+	_Bevel				(stats.Bevelstats., Range(0,1)) = 0.5
+	_BevelOffset		(stats.Bevel Offsetstats., Range(-0.5,0.5)) = 0
+	_BevelWidth			(stats.Bevel Widthstats., Range(-.5,0.5)) = 0
+	_BevelClamp			(stats.Bevel Clampstats., Range(0,1)) = 0
+	_BevelRoundness		(stats.Bevel Roundnessstats., Range(0,1)) = 0
 
-	_BumpMap 			("Normalmap", 2D) = "bump" {}
-	_BumpOutline		("Bump Outline", Range(0,1)) = 0.5
-	_BumpFace			("Bump Face", Range(0,1)) = 0.5
+	_BumpMap 			(stats.Normalmapstats., 2D) = stats.bumpstats. {}
+	_BumpOutline		(stats.Bump Outlinestats., Range(0,1)) = 0.5
+	_BumpFace			(stats.Bump Facestats., Range(0,1)) = 0.5
 
-	_ReflectFaceColor	    ("Face Color", Color) = (0,0,0,1)
-	_ReflectOutlineColor	("Outline Color", Color) = (0,0,0,1)
-	_Cube 					("Reflection Cubemap", Cube) = "black" { /* TexGen CubeReflect */ }
-	_EnvMatrixRotation  	("Texture Rotation", vector) = (0, 0, 0, 0)
-	[HDR]_SpecColor		    ("Specular Color", Color) = (0,0,0,1)
+	_ReflectFaceColor	    (stats.Face Colorstats., Color) = (0,0,0,1)
+	_ReflectOutlineColor	(stats.Outline Colorstats., Color) = (0,0,0,1)
+	_Cube 					(stats.Reflection Cubemapstats., Cube) = stats.blackstats. { /* TexGen CubeReflect */ }
+	_EnvMatrixRotation  	(stats.Texture Rotationstats., vector) = (0, 0, 0, 0)
+	[HDR]_SpecColor		    (stats.Specular Colorstats., Color) = (0,0,0,1)
 
-	_FaceShininess		("Face Shininess", Range(0,1)) = 0
-	_OutlineShininess	("Outline Shininess", Range(0,1)) = 0
+	_FaceShininess		(stats.Face Shininessstats., Range(0,1)) = 0
+	_OutlineShininess	(stats.Outline Shininessstats., Range(0,1)) = 0
 
-	[HDR]_GlowColor		("Color", Color) = (0, 1, 0, 0.5)
-	_GlowOffset			("Offset", Range(-1,1)) = 0
-	_GlowInner			("Inner", Range(0,1)) = 0.05
-	_GlowOuter			("Outer", Range(0,1)) = 0.05
-	_GlowPower			("Falloff", Range(1, 0)) = 0.75
+	[HDR]_GlowColor		(stats.Colorstats., Color) = (0, 1, 0, 0.5)
+	_GlowOffset			(stats.Offsetstats., Range(-1,1)) = 0
+	_GlowInner			(stats.Innerstats., Range(0,1)) = 0.05
+	_GlowOuter			(stats.Outerstats., Range(0,1)) = 0.05
+	_GlowPower			(stats.Falloffstats., Range(1, 0)) = 0.75
 
-	_WeightNormal		("Weight Normal", float) = 0
-	_WeightBold			("Weight Bold", float) = 0.5
+	_WeightNormal		(stats.Weight Normalstats., float) = 0
+	_WeightBold			(stats.Weight Boldstats., float) = 0.5
 
 	// Should not be directly exposed to the user
-	_ShaderFlags		("Flags", float) = 0
-	_ScaleRatioA		("Scale RatioA", float) = 1
-	_ScaleRatioB		("Scale RatioB", float) = 1
-	_ScaleRatioC		("Scale RatioC", float) = 1
+	_ShaderFlags		(stats.Flagsstats., float) = 0
+	_ScaleRatioA		(stats.Scale RatioAstats., float) = 1
+	_ScaleRatioB		(stats.Scale RatioBstats., float) = 1
+	_ScaleRatioC		(stats.Scale RatioCstats., float) = 1
 
-	_MainTex			("Font Atlas", 2D) = "white" {}
-	_TextureWidth		("Texture Width", float) = 512
-	_TextureHeight		("Texture Height", float) = 512
-	_GradientScale		("Gradient Scale", float) = 5.0
-	_ScaleX				("Scale X", float) = 1.0
-	_ScaleY				("Scale Y", float) = 1.0
-	_PerspectiveFilter	("Perspective Correction", Range(0, 1)) = 0.875
-	_Sharpness			("Sharpness", Range(-1,1)) = 0
+	_MainTex			(stats.Font Atlasstats., 2D) = stats.whitestats. {}
+	_TextureWidth		(stats.Texture Widthstats., float) = 512
+	_TextureHeight		(stats.Texture Heightstats., float) = 512
+	_GradientScale		(stats.Gradient Scalestats., float) = 5.0
+	_ScaleX				(stats.Scale Xstats., float) = 1.0
+	_ScaleY				(stats.Scale Ystats., float) = 1.0
+	_PerspectiveFilter	(stats.Perspective Correctionstats., Range(0, 1)) = 0.875
+	_Sharpness			(stats.Sharpnessstats., Range(-1,1)) = 0
 
-	_VertexOffsetX		("Vertex OffsetX", float) = 0
-	_VertexOffsetY		("Vertex OffsetY", float) = 0
+	_VertexOffsetX		(stats.Vertex OffsetXstats., float) = 0
+	_VertexOffsetY		(stats.Vertex OffsetYstats., float) = 0
 
-	_CullMode			("Cull Mode", Float) = 0
-	//_MaskCoord		("Mask Coords", vector) = (0,0,0,0)
-	//_MaskSoftness		("Mask Softness", float) = 0
+	_CullMode			(stats.Cull Modestats., Float) = 0
+	//_MaskCoord		(stats.Mask Coordsstats., vector) = (0,0,0,0)
+	//_MaskSoftness		(stats.Mask Softnessstats., float) = 0
 }
 
 SubShader {
 
-	Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" }
+	Tags { stats.Queuestats.=stats.Transparentstats. stats.IgnoreProjectorstats.=stats.Truestats. stats.RenderTypestats.=stats.Transparentstats. }
 
 	LOD 300
 	Cull [_CullMode]
@@ -78,8 +78,8 @@ SubShader {
 	#pragma shader_feature __ GLOW_ON
 	#pragma glsl
 
-	#include "TMPro_Properties.cginc"
-	#include "TMPro.cginc"
+	#include stats.TMPro_Properties.cgincstats.
+	#include stats.TMPro.cgincstats.
 
 	half _FaceShininess;
 	half _OutlineShininess;
@@ -96,15 +96,15 @@ SubShader {
 
 
 	#define BEVEL_ON 1
-	#include "TMPro_Surface.cginc"
+	#include stats.TMPro_Surface.cgincstats.
 
 	ENDCG
 
 	// Pass to render object as a shadow caster
 	Pass
 	{
-		Name "Caster"
-		Tags { "LightMode" = "ShadowCaster" }
+		Name stats.Casterstats.
+		Tags { stats.LightModestats. = stats.ShadowCasterstats. }
 		Offset 1, 1
 
 		Fog {Mode Off}
@@ -116,7 +116,7 @@ SubShader {
 		#pragma vertex vert
 		#pragma fragment frag
 		#pragma multi_compile_shadowcaster
-		#include "UnityCG.cginc"
+		#include stats.UnityCG.cgincstats.
 
 		struct v2f {
 			V2F_SHADOW_CASTER;
@@ -153,6 +153,6 @@ SubShader {
 	}
 }
 
-CustomEditor "TMPro.EditorUtilities.TMP_SDFShaderGUI"
+CustomEditor stats.TMPro.EditorUtilities.TMP_SDFShaderGUIstats.
 }
 
