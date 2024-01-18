@@ -1,32 +1,32 @@
-Shader stats.TextMeshPro/Spritestats.
+Shader "TextMeshPro/Sprite"
 {
 	Properties
 	{
-        [PerRendererData] _MainTex (stats.Sprite Texturestats., 2D) = stats.whitestats. {}
-		_Color (stats.Tintstats., Color) = (1,1,1,1)
+        [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
+		_Color ("Tint", Color) = (1,1,1,1)
 		
-		_StencilComp (stats.Stencil Comparisonstats., Float) = 8
-		_Stencil (stats.Stencil IDstats., Float) = 0
-		_StencilOp (stats.Stencil Operationstats., Float) = 0
-		_StencilWriteMask (stats.Stencil Write Maskstats., Float) = 255
-		_StencilReadMask (stats.Stencil Read Maskstats., Float) = 255
+		_StencilComp ("Stencil Comparison", Float) = 8
+		_Stencil ("Stencil ID", Float) = 0
+		_StencilOp ("Stencil Operation", Float) = 0
+		_StencilWriteMask ("Stencil Write Mask", Float) = 255
+		_StencilReadMask ("Stencil Read Mask", Float) = 255
 		
-		_CullMode (stats.Cull Modestats., Float) = 0
-		_ColorMask (stats.Color Maskstats., Float) = 15
-		_ClipRect (stats.Clip Rectstats., vector) = (-32767, -32767, 32767, 32767)
+		_CullMode ("Cull Mode", Float) = 0
+		_ColorMask ("Color Mask", Float) = 15
+		_ClipRect ("Clip Rect", vector) = (-32767, -32767, 32767, 32767)
 
-		[Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip (stats.Use Alpha Clipstats., Float) = 0
+		[Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip ("Use Alpha Clip", Float) = 0
 	}
 
 	SubShader
 	{
 		Tags
 		{ 
-			stats.Queuestats.=stats.Transparentstats. 
-			stats.IgnoreProjectorstats.=stats.Truestats. 
-			stats.RenderTypestats.=stats.Transparentstats. 
-			stats.PreviewTypestats.=stats.Planestats.
-			stats.CanUseSpriteAtlasstats.=stats.Truestats.
+			"Queue"="Transparent" 
+			"IgnoreProjector"="True" 
+			"RenderType"="Transparent" 
+			"PreviewType"="Plane"
+			"CanUseSpriteAtlas"="True"
 		}
 		
 		Stencil
@@ -47,14 +47,14 @@ Shader stats.TextMeshPro/Spritestats.
 
 		Pass
 		{
-            Name stats.Defaultstats.
+            Name "Default"
 		CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
             #pragma target 2.0
 
-			#include stats.UnityCG.cgincstats.
-			#include stats.UnityUI.cgincstats.
+			#include "UnityCG.cginc"
+			#include "UnityUI.cginc"
 
             #pragma multi_compile __ UNITY_UI_CLIP_RECT
             #pragma multi_compile __ UNITY_UI_ALPHACLIP

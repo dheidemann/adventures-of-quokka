@@ -3,66 +3,66 @@
 // - No Glow Option
 // - Softness is applied on both side of the outline
 
-Shader stats.TextMeshPro/Mobile/Distance Field SSDstats. {
+Shader "TextMeshPro/Mobile/Distance Field SSD" {
 
 Properties {
-	[HDR]_FaceColor		(stats.Face Colorstats., Color) = (1,1,1,1)
-	_FaceDilate			(stats.Face Dilatestats., Range(-1,1)) = 0
+	[HDR]_FaceColor		("Face Color", Color) = (1,1,1,1)
+	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
 
-	[HDR]_OutlineColor	(stats.Outline Colorstats., Color) = (0,0,0,1)
-	_OutlineWidth		(stats.Outline Thicknessstats., Range(0,1)) = 0
-	_OutlineSoftness	(stats.Outline Softnessstats., Range(0,1)) = 0
+	[HDR]_OutlineColor	("Outline Color", Color) = (0,0,0,1)
+	_OutlineWidth		("Outline Thickness", Range(0,1)) = 0
+	_OutlineSoftness	("Outline Softness", Range(0,1)) = 0
 
-	[HDR]_UnderlayColor		(stats.Border Colorstats., Color) = (0,0,0,.5)
-	_UnderlayOffsetX 	(stats.Border OffsetXstats., Range(-1,1)) = 0
-	_UnderlayOffsetY 	(stats.Border OffsetYstats., Range(-1,1)) = 0
-	_UnderlayDilate		(stats.Border Dilatestats., Range(-1,1)) = 0
-	_UnderlaySoftness 	(stats.Border Softnessstats., Range(0,1)) = 0
+	[HDR]_UnderlayColor		("Border Color", Color) = (0,0,0,.5)
+	_UnderlayOffsetX 	("Border OffsetX", Range(-1,1)) = 0
+	_UnderlayOffsetY 	("Border OffsetY", Range(-1,1)) = 0
+	_UnderlayDilate		("Border Dilate", Range(-1,1)) = 0
+	_UnderlaySoftness 	("Border Softness", Range(0,1)) = 0
 
-	_WeightNormal		(stats.Weight Normalstats., float) = 0
-	_WeightBold			(stats.Weight Boldstats., float) = .5
+	_WeightNormal		("Weight Normal", float) = 0
+	_WeightBold			("Weight Bold", float) = .5
 
-	_ShaderFlags		(stats.Flagsstats., float) = 0
-	_ScaleRatioA		(stats.Scale RatioAstats., float) = 1
-	_ScaleRatioB		(stats.Scale RatioBstats., float) = 1
-	_ScaleRatioC		(stats.Scale RatioCstats., float) = 1
+	_ShaderFlags		("Flags", float) = 0
+	_ScaleRatioA		("Scale RatioA", float) = 1
+	_ScaleRatioB		("Scale RatioB", float) = 1
+	_ScaleRatioC		("Scale RatioC", float) = 1
 
-	_MainTex			(stats.Font Atlasstats., 2D) = stats.whitestats. {}
-	_TextureWidth		(stats.Texture Widthstats., float) = 512
-	_TextureHeight		(stats.Texture Heightstats., float) = 512
-	_GradientScale		(stats.Gradient Scalestats., float) = 5
-	_ScaleX				(stats.Scale Xstats., float) = 1
-	_ScaleY				(stats.Scale Ystats., float) = 1
-	_PerspectiveFilter	(stats.Perspective Correctionstats., Range(0, 1)) = 0.875
-	_Sharpness			(stats.Sharpnessstats., Range(-1,1)) = 0
+	_MainTex			("Font Atlas", 2D) = "white" {}
+	_TextureWidth		("Texture Width", float) = 512
+	_TextureHeight		("Texture Height", float) = 512
+	_GradientScale		("Gradient Scale", float) = 5
+	_ScaleX				("Scale X", float) = 1
+	_ScaleY				("Scale Y", float) = 1
+	_PerspectiveFilter	("Perspective Correction", Range(0, 1)) = 0.875
+	_Sharpness			("Sharpness", Range(-1,1)) = 0
 
-	_VertexOffsetX		(stats.Vertex OffsetXstats., float) = 0
-	_VertexOffsetY		(stats.Vertex OffsetYstats., float) = 0
+	_VertexOffsetX		("Vertex OffsetX", float) = 0
+	_VertexOffsetY		("Vertex OffsetY", float) = 0
 
-	_ClipRect			(stats.Clip Rectstats., vector) = (-32767, -32767, 32767, 32767)
-	_MaskSoftnessX		(stats.Mask SoftnessXstats., float) = 0
-	_MaskSoftnessY		(stats.Mask SoftnessYstats., float) = 0
-	_MaskTex			(stats.Mask Texturestats., 2D) = stats.whitestats. {}
-	_MaskInverse		(stats.Inversestats., float) = 0
-	_MaskEdgeColor		(stats.Edge Colorstats., Color) = (1,1,1,1)
-	_MaskEdgeSoftness	(stats.Edge Softnessstats., Range(0, 1)) = 0.01
-	_MaskWipeControl	(stats.Wipe Positionstats., Range(0, 1)) = 0.5
+	_ClipRect			("Clip Rect", vector) = (-32767, -32767, 32767, 32767)
+	_MaskSoftnessX		("Mask SoftnessX", float) = 0
+	_MaskSoftnessY		("Mask SoftnessY", float) = 0
+	_MaskTex			("Mask Texture", 2D) = "white" {}
+	_MaskInverse		("Inverse", float) = 0
+	_MaskEdgeColor		("Edge Color", Color) = (1,1,1,1)
+	_MaskEdgeSoftness	("Edge Softness", Range(0, 1)) = 0.01
+	_MaskWipeControl	("Wipe Position", Range(0, 1)) = 0.5
 
-	_StencilComp		(stats.Stencil Comparisonstats., Float) = 8
-	_Stencil			(stats.Stencil IDstats., Float) = 0
-	_StencilOp			(stats.Stencil Operationstats., Float) = 0
-	_StencilWriteMask	(stats.Stencil Write Maskstats., Float) = 255
-	_StencilReadMask	(stats.Stencil Read Maskstats., Float) = 255
+	_StencilComp		("Stencil Comparison", Float) = 8
+	_Stencil			("Stencil ID", Float) = 0
+	_StencilOp			("Stencil Operation", Float) = 0
+	_StencilWriteMask	("Stencil Write Mask", Float) = 255
+	_StencilReadMask	("Stencil Read Mask", Float) = 255
 
-    _CullMode           (stats.Cull Modestats., Float) = 0
-	_ColorMask			(stats.Color Maskstats., Float) = 15
+    _CullMode           ("Cull Mode", Float) = 0
+	_ColorMask			("Color Mask", Float) = 15
 }
 
 SubShader {
 	Tags {
-		stats.Queuestats.=stats.Transparentstats.
-		stats.IgnoreProjectorstats.=stats.Truestats.
-		stats.RenderTypestats.=stats.Transparentstats.
+		"Queue"="Transparent"
+		"IgnoreProjector"="True"
+		"RenderType"="Transparent"
 	}
 
 	Stencil
@@ -92,15 +92,15 @@ SubShader {
 		#pragma multi_compile __ UNITY_UI_CLIP_RECT
 		#pragma multi_compile __ UNITY_UI_ALPHACLIP
 
-		#include stats.UnityCG.cgincstats.
-		#include stats.UnityUI.cgincstats.
-		#include stats.TMPro_Properties.cgincstats.
+		#include "UnityCG.cginc"
+		#include "UnityUI.cginc"
+		#include "TMPro_Properties.cginc"
 
-		#include stats.TMPro_Mobile.cgincstats.
+		#include "TMPro_Mobile.cginc"
 
 		ENDCG
 	}
 }
 
-CustomEditor stats.TMPro.EditorUtilities.TMP_SDFShaderGUIstats.
+CustomEditor "TMPro.EditorUtilities.TMP_SDFShaderGUI"
 }

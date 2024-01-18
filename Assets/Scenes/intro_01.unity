@@ -14218,7 +14218,7 @@ GameObject:
   - component: {fileID: 1335529085}
   m_Layer: 0
   m_Name: trigger
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14822,7 +14822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fitnessBar: {fileID: 944919245}
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 944919245}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
