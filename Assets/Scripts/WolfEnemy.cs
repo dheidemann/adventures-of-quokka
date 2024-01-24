@@ -16,7 +16,6 @@ public class WolfEnemy : Enemy {
 
     }
 
-    public virtual DropLoot(){
-        
-    }
+    //public virtual DropLoot()
+    //{}
 }
