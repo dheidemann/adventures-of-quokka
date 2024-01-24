@@ -16,11 +16,6 @@ public class FoxEnemy : Enemy {
 
     }
 
-<<<<<<< HEAD
-    //public virtual DropLoot(){
-=======
-    public override void DropLoot(){
->>>>>>> 67dcd085b278d355e8d8bb5e5ec4727e4b2d8708
-
-    //}
+    //public override void DropLoot()
+    //{}
 }
