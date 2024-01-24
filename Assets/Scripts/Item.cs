@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName="New Collectable Item",menuName="Item/Collectable")]
@@ -7,8 +8,6 @@ public class Item : ScriptableObject
     public string itemName;
     public Sprite icon;
     public bool collected = false;
-    public Sprite ImagegroundView;
-    public Sprite invView;
 }
 
 public enum EquipableType
