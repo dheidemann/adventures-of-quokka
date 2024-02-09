@@ -5,78 +5,80 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
-    public List<Item> Items = new List<Item>();
-    public EquipableItem Weapon;
-    public EquipableItem Armor;
+    public List<Item> itemList = new();
+    public EquipableItem weapon;
+    public EquipableItem armor;
 
-    public Transform ItemContent;
-    public GameObject InventoryItem;
+    public Transform inventoryContent;
+    public GameObject inventoryItemTemplate;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public void Add(Item item)
+    public void Add(Item collectableItem)
     {
-        Items.Add(item);
+        itemList.Add(collectableItem);
     }
 
-    public void Remove(Item item)
+    public void Remove(Item collectableItem)
     {
-        Items.Remove(item);
+        itemList.Remove(collectableItem);
     }
 
-    public void Equip(EquipableItem item)
+    public void Equip(EquipableItem collectableItem)
     {
-        switch (item.type)
+        switch (collectableItem.type)
         {
             case EquipableType.Armor: 
-                Armor = item;
+                armor = collectableItem;
                 break;
             case EquipableType.Weapon: 
-                Weapon = item;
+                weapon = collectableItem;
                 break;
         }            
-        Remove(item);
+        Remove(collectableItem);
     }
 
-    public void Unequip(EquipableItem item)
+    public void Unequip(EquipableItem collectableItem)
     {
-        switch (item.type)
+        switch (collectableItem.type)
         {
             case EquipableType.Armor: 
-                Armor = null;
+                armor = null;
                 break;
             case EquipableType.Weapon: 
-                Weapon = null;
+                weapon = null;
                 break;
         }
-        Add(item);
+        Add(collectableItem);
     }
 
-    public void Drop(Item item)
+    public void Drop(Item collectableItem)
     {}
 
     public void ListItems()
     {
-        foreach (Transform item in ItemContent)
+        // clean inventory before opening
+        // othewise the items multiply
+        foreach (Transform collectableItem in inventoryContent)
         {
-            Destroy(item.gameObject);
+            Destroy(collectableItem.gameObject);
         }
 
-        foreach (var item in Items)
+        foreach (var collectableItem in itemList)
         {
-            GameObject obj = Instantiate(InventoryItem, ItemContent);
+            GameObject obj = Instantiate(inventoryItemTemplate, inventoryContent);
             var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-            itemIcon.sprite = item.icon; 
+            itemIcon.sprite = collectableItem.icon; 
         }
     }
 
-    public void Consume(ConsumableItem item)
+    public void Consume(ConsumableItem collectableItem)
     {
-        // Player.heal(item.heals)
-        Remove(item);
+        // Player.heal(collectableItem.heals)
+        Remove(collectableItem);
     }
 
 }
