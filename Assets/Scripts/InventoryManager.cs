@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
-    public List<Item> itemList = new();
+    public List<Item> itemList = new List<Item>();
     public EquipableItem weapon;
     public EquipableItem armor;
 

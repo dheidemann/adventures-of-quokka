@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class FoxEnemy : Enemy {
 
+
     public FoxEnemy(){
         currentHP = 10; 
         attackRange = 2; 

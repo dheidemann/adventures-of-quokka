@@ -20,19 +20,28 @@ public class player : MonoBehaviour
 
     private float health;
 
+    private float extraDamage;
+
     private Levels level;
 
     private bool regenerating;
 
     private bool sprinting;
 
+    private bool readToAttack;
+
     private Rigidbody2D rb;
 
     private Vector2 movement;
 
+    private LayerMask raycastFilter;
+
     void Start()
     {
+        extraDamage = 0;
+        raycastFilter = LayerMask.GetMask("enemy");
         rb = GetComponent<Rigidbody2D>();
+        readToAttack = true;
         regenerating = false;
         sprinting = false;
         level = new Levels();
@@ -43,6 +52,12 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.DrawRay(transform.position, movement * 5f, Color.red);
+        if (Input.GetKeyDown(KeyCode.E) && readToAttack)
+        {
+            StartCoroutine(attack());
+
+        }
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
     }
@@ -133,7 +148,7 @@ public class player : MonoBehaviour
 
     public bool checkFitness()
     {
-        if((int)fitness > 0)
+        if ((int)fitness > 0)
         {
             return true;
         }
@@ -166,5 +181,19 @@ public class player : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.01f);
         }
         regenerating = false;
+    }
+    IEnumerator attack()
+    {
+        readToAttack = false;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, movement, 5f, raycastFilter);
+
+        print(hit);
+        if (hit.collider != null)
+        {
+     //       hit.collider.gameObject.GetComponent<Enemy>().ReceiveDamage(level.getCurrentStat(playerStats.damage) + extraDamage);
+            print("damaged enemy" + (level.getCurrentStat(playerStats.damage) + extraDamage));
+        }
+        yield return new WaitForSecondsRealtime((5000 - level.getCurrentStat(playerStats.attackCooldown)) / 1000);
+        readToAttack = true;
     }
 }

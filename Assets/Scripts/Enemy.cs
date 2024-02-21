@@ -20,7 +20,9 @@ public abstract class Enemy : MonoBehaviour {
 
 
 void Start() {
-    player = GameObject.FindGameObjectWithTag("Player"); 
+
+    player = GameObject.FindGameObjectWithTag("Player");
+    
 }
 
 IEnumerator Attack(int attackCooldown, int damage) {
@@ -33,8 +35,8 @@ IEnumerator Attack(int attackCooldown, int damage) {
 public void Update(){
     // Wenn Distanz auf x & y Achse zu Player kleiner als followRange -> setze isFollowing auf true und ruf Methode followPlayer() auf
     if (Vector2.Distance(new Vector2(player.transform.position.x, player.transform.position.y), new Vector2(transform.position.x, transform.position.y)) <= followRange) {
-        isFollowing = true; 
-        FollowPlayer();
+    isFollowing = true; 
+    FollowPlayer();
     }
     // else isFollowing = false, da out of range; 
     else {
@@ -49,7 +51,7 @@ public void Update(){
 public void FollowPlayer(){
     if (isFollowing == true){
         // beweg dich auf küzestem Weg zum Player
-        transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.transform.position.x, player.transform.position.y), speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, player.transform.position.y, -6), speed * Time.deltaTime);
     }
 }
 
