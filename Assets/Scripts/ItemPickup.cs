@@ -15,6 +15,10 @@ public class ItemPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Pickup();
+        if(collision.gameObject.tag == "Player")
+        {
+            Pickup();
+        }
+
     }
 }
