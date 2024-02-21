@@ -50,35 +50,38 @@ public class Levels
         {
             for (int i = 2; i <= 10; i++)
             {
-                LevelStats.Add((i, stat), (int)(Math.Round(((0.1 * i) + 1) * getCurrentStat(stat))));
+                LevelStats.Add((i, stat), (int)(Math.Round(((0.1 * i) + 1) * GetCurrentStat(stat))));
             }
         }
     }
 
     //Getter for playerStats
-    public int getCurrentLevel()
+    public int GetCurrentLevel()
     {
         return level;
     }
-    public int getCurrentStat(playerStats type)
+    public int GetCurrentStat(playerStats type)
     {
         return LevelStats[(level, type)];
+    }
+    public Dictionary<(int, playerStats), int> GetLevelStats(){
+        return LevelStats; 
     }
 
     //Manipulate Player Level
     //Increase Level 
-    public void increaseLevel()
+    public void IncreaseLevel()
     {
         level++;
     }
 
     //Decrease Level 
-    public void decreaseLevel()
+    public void DecreaseLevel()
     {
         level--;
     }
 
-    public void setLevel(int i)
+    public void SetLevel(int i)
     {
         level = i;
     }
@@ -96,4 +99,5 @@ public class Levels
     {
 
     }
+    
 }
