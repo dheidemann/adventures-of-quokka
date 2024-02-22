@@ -36,8 +36,15 @@ public class player : MonoBehaviour
 
     private LayerMask raycastFilter;
 
+    private Animator animator;
+
+    private Animator GUIAnimator;
+
+
     void Start()
     {
+        GUIAnimator = GameObject.FindGameObjectWithTag("GUI").GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         extraDamage = 0;
         raycastFilter = LayerMask.GetMask("enemy");
         rb = GetComponent<Rigidbody2D>();
@@ -52,7 +59,7 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(transform.position, movement * 5f, Color.red);
+        Debug.DrawRay(transform.position, transform.forward * 5f, Color.red);
         if (Input.GetKeyDown(KeyCode.E) && readToAttack)
         {
             StartCoroutine(attack());
@@ -67,18 +74,17 @@ public class player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.LeftControl) && checkFitness())
+        if (Input.GetKey(KeyCode.LeftControl) && CheckFitness())
         {
             rb.MovePosition(rb.position + movement * level.GetCurrentStat(playerStats.sprintSpeed) * Time.fixedDeltaTime);
             decreaseStat(statType.fitness, 0.5f);
             sprinting = true;
-            print(checkFitness());
         }
         else
         {
             rb.MovePosition(rb.position + movement * level.GetCurrentStat(playerStats.moveSpeed) * Time.fixedDeltaTime);
             sprinting = false;
-            if (!regenerating && checkFitness())
+            if (!regenerating && CheckFitness())
             {
                 StartCoroutine(regenerate(fitness, false));
             }
@@ -124,11 +130,11 @@ public class player : MonoBehaviour
                 else
                 {
                     fitness = 0;
-                    print("no fitness left");
                     StartCoroutine(regenerate(fitness, true));
                 }
                 break;
             case statType.health:
+                animator.SetTrigger("hurtTrigger");
                 if (health - value > 0)
                 {
                     health -= value;
@@ -143,7 +149,16 @@ public class player : MonoBehaviour
         }
     }
 
-    public bool checkFitness()
+    public void IncreaseExtraDamage(int dmg)
+    {
+        extraDamage += dmg;
+    }
+    public void DecreaseExtraDamage(int dmg)
+    {
+        extraDamage -= dmg;
+    }
+
+    public bool CheckFitness()
     {
         if ((int)fitness > 0)
         {
@@ -181,16 +196,19 @@ public class player : MonoBehaviour
     }
     IEnumerator attack()
     {
+        float localAttackCooldown = (5000 - level.GetCurrentStat(playerStats.attackCooldown)) / 1000;
         readToAttack = false;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, movement, 5f, raycastFilter);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, movement, level.GetCurrentStat(playerStats.reach)/20f, raycastFilter);
+        animator.SetTrigger("attackTrigger");
+        GUIAnimator.SetFloat("cooldown", 1 / localAttackCooldown);
+        GUIAnimator.SetTrigger("pressedTrigger");
 
-        print(hit);
         if (hit.collider != null)
         {
             hit.collider.gameObject.GetComponent<Enemy>().ReceiveDamage(level.GetCurrentStat(playerStats.damage) + extraDamage);
-            print("damaged enemy" + (level.GetCurrentStat(playerStats.damage) + extraDamage));
         }
-        yield return new WaitForSecondsRealtime((5000 - level.GetCurrentStat(playerStats.attackCooldown)) / 1000);
+        yield return new WaitForSecondsRealtime(localAttackCooldown);
+        print("ready to attack");
         readToAttack = true;
     }
 

@@ -6,20 +6,17 @@ using System.Collections.Generic;
 
 public class FoxEnemy : Enemy {
 
-
-    public void Start()
+    public override void init()
     {
-
-        maxHP = 100;
-        currentHP = 100;
-        attackRange = 2;
-        damage = 10;
-        followRange = 8;
-        speed = 3;
-        attackCooldown = 2;
-
+        maxHP = 50;
+        currentHP = 50;
+        attackRange = 1;
+        damage = 5;
+        followRange = 6;
+        speed = 2;
+        attackCooldown = 4;
     }
-
+    
     //public override void DropLoot()
     //{}
 }

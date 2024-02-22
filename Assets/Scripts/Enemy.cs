@@ -20,19 +20,25 @@
         public int attackCooldown; 
         public ParticleSystem deathEffect;
         public GameObject healthBar;
+        public Animator animator;
 
 
     void Start() {
 
         player = GameObject.FindGameObjectWithTag("Player");
+        animator = GetComponent<Animator>();
+        init();
     }
 
     IEnumerator Attack(int attackCooldown, int damage) {
+        animator.SetTrigger("attackTrigger");
         player.GetComponent<player>().decreaseStat(statType.health, damage); 
         attacked = true;
         yield return new WaitForSecondsRealtime(attackCooldown);
         attacked = false;
     }
+
+    public abstract void init();
 
     public void Update(){
         // Wenn Distanz auf x & y Achse zu Player kleiner als followRange -> setze isFollowing auf true und ruf Methode followPlayer() auf
@@ -58,8 +64,9 @@
     }
 
     public void ReceiveDamage(float damage){
-        print("current HP: " + currentHP);
-        print("damage taken: " + damage);
+
+        animator.SetTrigger("hurtTrigger");
+
         if(damage >= currentHP){ 
            Die();
         }
