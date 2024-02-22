@@ -8,6 +8,7 @@ using UnityEngine.TestTools;
 
 [TestFixture]
 public class LevelsTests {
+    // Tests Req 2.2.3.1.1 Klasse Levels
     
     [Test]
     public void TestDecreaseLevel(){
@@ -18,6 +19,14 @@ public class LevelsTests {
     }
 
     [Test]
+    public void TestDecreaseLevelOutOfBounds(){
+        Levels testLevel = new Levels(); 
+        testLevel.DecreaseLevel();
+        //Check that level is still 1
+        Assert.AreEqual(testLevel.GetCurrentLevel(), 1);
+    }
+
+    [Test]
     public void TestSetLevel(){
         Levels testLevel = new Levels(); 
         testLevel.SetLevel(3); 
@@ -25,10 +34,27 @@ public class LevelsTests {
     }
 
     [Test]
+    public void TestSetLevelOutOfBounds(){
+        Levels testLevel = new Levels(); 
+        testLevel.SetLevel(13); 
+        // check that Level has not been updated and is still 1
+        Assert.AreEqual(testLevel.GetCurrentLevel(), 1); 
+    }
+
+    [Test]
     public void TestIncreaseLevel(){
         Levels testLevel = new Levels(); 
         testLevel.IncreaseLevel(); 
         Assert.AreEqual(testLevel.GetCurrentLevel(), 2); 
+    }
+
+    [Test]
+    public void TestIncreaseLevelOutOfBounds(){
+        Levels testLevel = new Levels(); 
+        testLevel.SetLevel(10); 
+        testLevel.IncreaseLevel(); 
+        //check that level has not been increased and is still 10
+        Assert.AreEqual(testLevel.GetCurrentLevel(), 10); 
     }
 
     [Test]
@@ -46,6 +72,7 @@ public class LevelsTests {
 
     [Test]
     public void TestLevelMath(){
+        //test, ob die höheren Level richtig eingefügt wurden 
         Levels testLevel = new Levels(); 
         testLevel.IncreaseLevel(); 
         Assert.AreEqual(testLevel.GetCurrentStat(playerStats.maxHealth), 120); 

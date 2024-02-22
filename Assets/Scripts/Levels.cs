@@ -21,6 +21,7 @@ public enum playerStats
 
 public class Levels
 {
+    //implementiert Req 2.2.3.1.1 Klasse Levels
     private int level; // saves current player Level
     private Dictionary<(int, playerStats), int> LevelStats; //saves Overview about Stats at different Levels
 
@@ -72,18 +73,36 @@ public class Levels
     //Increase Level 
     public void IncreaseLevel()
     {
-        level++;
+        // check if level is in allowed range if increased, if yes level is increased by 1
+        if (level < 10){
+            level++;
+        }
+        else {
+            Debug.Log("Level can not be increased, as Level is already 10"); 
+        }
     }
 
     //Decrease Level 
     public void DecreaseLevel()
     {
-        level--;
+        //check if level is in allowed range if decreased, if yes level is decreased by 1
+        if(level > 1){
+            level--;
+        }
+        else {
+            Debug.Log("Level can not be decreased, as Level is already 1");
+        }
     }
 
     public void SetLevel(int i)
     {
-        level = i;
+        //check if input is in allowed range, if yes level is updated
+        if(i > 0 && i < 11){
+            level = i; 
+        }
+        else {
+            Debug.Log("Level can not be set to input parameter, as it is out of allowed range"); 
+        }
     }
 
 
