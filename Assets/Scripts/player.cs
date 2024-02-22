@@ -45,8 +45,8 @@ public class player : MonoBehaviour
         regenerating = false;
         sprinting = false;
         level = new Levels();
-        fitness = level.getCurrentStat(playerStats.maxFitness);
-        health = level.getCurrentStat(playerStats.maxHealth);
+        fitness = level.GetCurrentStat(playerStats.maxFitness);
+        health = level.GetCurrentStat(playerStats.maxHealth);
     }
 
     // Update is called once per frame
@@ -61,22 +61,22 @@ public class player : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         //keep UI up to date
-        healthBar.fillAmount = health / level.getCurrentStat(playerStats.maxHealth);
-        fitnessBar.fillAmount = fitness / level.getCurrentStat(playerStats.maxFitness);
+        healthBar.fillAmount = health / level.GetCurrentStat(playerStats.maxHealth);
+        fitnessBar.fillAmount = fitness / level.GetCurrentStat(playerStats.maxFitness);
     }
 
     void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.LeftControl) && checkFitness())
         {
-            rb.MovePosition(rb.position + movement * level.getCurrentStat(playerStats.sprintSpeed) * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + movement * level.GetCurrentStat(playerStats.sprintSpeed) * Time.fixedDeltaTime);
             decreaseStat(statType.fitness, 0.5f);
             sprinting = true;
             print(checkFitness());
         }
         else
         {
-            rb.MovePosition(rb.position + movement * level.getCurrentStat(playerStats.moveSpeed) * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + movement * level.GetCurrentStat(playerStats.moveSpeed) * Time.fixedDeltaTime);
             sprinting = false;
             if (!regenerating && checkFitness())
             {
@@ -90,23 +90,23 @@ public class player : MonoBehaviour
         switch (type)
         {
             case statType.fitness:
-                if (fitness + value < level.getCurrentStat(playerStats.maxFitness))
+                if (fitness + value < level.GetCurrentStat(playerStats.maxFitness))
                 {
                     fitness += value;
                 }
                 else
                 {
-                    fitness = level.getCurrentStat(playerStats.maxFitness);           
+                    fitness = level.GetCurrentStat(playerStats.maxFitness);           
                 }
                 break;
             case statType.health:
-                if (health + value < level.getCurrentStat(playerStats.maxHealth))
+                if (health + value < level.GetCurrentStat(playerStats.maxHealth))
                 {
                     health += value;
                 }
                 else
                 {
-                    health = level.getCurrentStat(playerStats.maxHealth);
+                    health = level.GetCurrentStat(playerStats.maxHealth);
                 }
                 break;
         }
@@ -157,7 +157,7 @@ public class player : MonoBehaviour
 
     public void die()
     {
-        level.decreaseLevel();
+        level.DecreaseLevel();
         SceneManager.LoadScene("deathScreen");
     }
 
@@ -166,13 +166,13 @@ public class player : MonoBehaviour
         regenerating = true;
         if (empty)
         {
-            yield return new WaitForSecondsRealtime(level.getCurrentStat(playerStats.timeToRegenerateFitnessAfterEmpty) / 1000);
+            yield return new WaitForSecondsRealtime(level.GetCurrentStat(playerStats.timeToRegenerateFitnessAfterEmpty) / 1000);
         }
         else
         {
-            yield return new WaitForSecondsRealtime(level.getCurrentStat(playerStats.timeToRegenerateFitness) / 1000);
+            yield return new WaitForSecondsRealtime(level.GetCurrentStat(playerStats.timeToRegenerateFitness) / 1000);
         }
-        while (fitness >= currentFitness && fitness < level.getCurrentStat(playerStats.maxFitness) && !sprinting)
+        while (fitness >= currentFitness && fitness < level.GetCurrentStat(playerStats.maxFitness) && !sprinting)
         {
             increaseStat(statType.fitness, 0.04f);
             yield return new WaitForSecondsRealtime(0.01f);
@@ -187,10 +187,10 @@ public class player : MonoBehaviour
         print(hit);
         if (hit.collider != null)
         {
-            hit.collider.gameObject.GetComponent<Enemy>().ReceiveDamage(level.getCurrentStat(playerStats.damage) + extraDamage);
-            print("damaged enemy" + (level.getCurrentStat(playerStats.damage) + extraDamage));
+            hit.collider.gameObject.GetComponent<Enemy>().ReceiveDamage(level.GetCurrentStat(playerStats.damage) + extraDamage);
+            print("damaged enemy" + (level.GetCurrentStat(playerStats.damage) + extraDamage));
         }
-        yield return new WaitForSecondsRealtime((5000 - level.getCurrentStat(playerStats.attackCooldown)) / 1000);
+        yield return new WaitForSecondsRealtime((5000 - level.GetCurrentStat(playerStats.attackCooldown)) / 1000);
         readToAttack = true;
     }
 
