@@ -61,8 +61,8 @@ public class player : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         //keep UI up to date
-        healthBar.fillAmount = health / level.getCurrentStat(playerStats.maxHealth);
-        fitnessBar.fillAmount = fitness / level.getCurrentStat(playerStats.maxFitness);
+        healthBar.fillAmount = health / level.GetCurrentStat(playerStats.maxHealth);
+        fitnessBar.fillAmount = fitness / level.GetCurrentStat(playerStats.maxFitness);
     }
 
     void FixedUpdate()
@@ -96,7 +96,7 @@ public class player : MonoBehaviour
                 }
                 else
                 {
-                    fitness = level.getCurrentStat(playerStats.maxFitness);           
+                    fitness = level.GetCurrentStat(playerStats.maxFitness);           
                 }
                 break;
             case statType.health:
@@ -106,7 +106,7 @@ public class player : MonoBehaviour
                 }
                 else
                 {
-                    health = level.getCurrentStat(playerStats.maxHealth);
+                    health = level.GetCurrentStat(playerStats.maxHealth);
                 }
                 break;
         }
@@ -187,8 +187,8 @@ public class player : MonoBehaviour
         print(hit);
         if (hit.collider != null)
         {
-            hit.collider.gameObject.GetComponent<Enemy>().ReceiveDamage((int)(level.getCurrentStat(playerStats.damage) + extraDamage));
-            print("damaged enemy" + (level.getCurrentStat(playerStats.damage) + extraDamage));
+            hit.collider.gameObject.GetComponent<Enemy>().ReceiveDamage((int)(level.GetCurrentStat(playerStats.damage) + extraDamage));
+            print("damaged enemy" + (level.GetCurrentStat(playerStats.damage) + extraDamage));
         }
         yield return new WaitForSecondsRealtime((5000 - level.GetCurrentStat(playerStats.attackCooldown)) / 1000);
         readToAttack = true;
