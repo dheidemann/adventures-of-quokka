@@ -187,7 +187,7 @@ public class player : MonoBehaviour
         print(hit);
         if (hit.collider != null)
         {
-            hit.collider.gameObject.GetComponent<Enemy>().ReceiveDamage((int)(level.getCurrentStat(playerStats.damage) + extraDamage));
+            hit.collider.gameObject.GetComponent<Enemy>().ReceiveDamage(level.getCurrentStat(playerStats.damage) + extraDamage);
             print("damaged enemy" + (level.getCurrentStat(playerStats.damage) + extraDamage));
         }
         yield return new WaitForSecondsRealtime((5000 - level.getCurrentStat(playerStats.attackCooldown)) / 1000);

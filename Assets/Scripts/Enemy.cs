@@ -5,18 +5,21 @@
     using System.Collections.Generic;
 
     public abstract class Enemy : MonoBehaviour {
-        public int id; 
-        public int currentHP; 
-        public int attackRange; 
-        public bool attacked = false; 
-        public int damage; 
-        public GameObject player; 
-        public int followRange; 
-        public bool isFollowing = false; 
-        public float speed; 
-        public List<Item> drops; 
+
+        public float maxHP;
+        public int id;
+        public float currentHP;
+        public int attackRange;
+        public bool attacked = false;
+        public int damage;
+        public GameObject player;
+        public int followRange;
+        public bool isFollowing = false;
+        public float speed;
+        public List<Item> drops;
         public int attackCooldown; 
         public ParticleSystem deathEffect;
+        public GameObject healthBar;
 
 
     void Start() {
@@ -54,12 +57,15 @@
         }
     }
 
-    public void ReceiveDamage(int damage){
+    public void ReceiveDamage(float damage){
+        print("current HP: " + currentHP);
+        print("damage taken: " + damage);
         if(damage >= currentHP){ 
            Die();
         }
         else {
-            currentHP -= damage; 
+            currentHP -= damage;
+            healthBar.GetComponent<enemyHealthBar>().SetHealth(currentHP / maxHP);
         }
     }
 
