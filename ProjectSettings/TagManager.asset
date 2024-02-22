@@ -6,11 +6,12 @@ TagManager:
   tags:
   - exitSceneTrigger
   - Item
+  - enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - enemy
   - Water
   - UI
   - 

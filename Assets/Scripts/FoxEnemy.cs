@@ -8,11 +8,11 @@ public class FoxEnemy : Enemy {
 
 
     public FoxEnemy(){
-        currentHP = 10; 
+        currentHP = 50; 
         attackRange = 2; 
-        damage = 3; 
-        followRange = 5; 
-        speed = 2; 
+        damage = 10; 
+        followRange = 8; 
+        speed = 3; 
         attackCooldown = 2; 
 
     }

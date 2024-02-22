@@ -60,6 +60,9 @@ public class player : MonoBehaviour
         }
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+        //keep UI up to date
+        healthBar.fillAmount = health / level.getCurrentStat(playerStats.maxHealth);
+        fitnessBar.fillAmount = fitness / level.getCurrentStat(playerStats.maxFitness);
     }
 
     void FixedUpdate()
@@ -90,24 +93,20 @@ public class player : MonoBehaviour
                 if (fitness + value < level.GetCurrentStat(playerStats.maxFitness))
                 {
                     fitness += value;
-                    fitnessBar.fillAmount = fitness / level.GetCurrentStat(playerStats.maxFitness);
                 }
                 else
                 {
-                    fitness = level.GetCurrentStat(playerStats.maxFitness);
-                    fitnessBar.fillAmount = fitness / level.GetCurrentStat(playerStats.maxFitness);
+                    fitness = level.getCurrentStat(playerStats.maxFitness);           
                 }
                 break;
             case statType.health:
                 if (health + value < level.GetCurrentStat(playerStats.maxHealth))
                 {
                     health += value;
-                    healthBar.fillAmount = health / level.GetCurrentStat(playerStats.maxHealth);
                 }
                 else
                 {
-                    health = level.GetCurrentStat(playerStats.maxHealth);
-                    healthBar.fillAmount = health / level.GetCurrentStat(playerStats.maxHealth);
+                    health = level.getCurrentStat(playerStats.maxHealth);
                 }
                 break;
         }
@@ -121,7 +120,6 @@ public class player : MonoBehaviour
                 if ((int)(fitness - value) > 0)
                 {
                     fitness -= value;
-                    fitnessBar.fillAmount = fitness / level.GetCurrentStat(playerStats.maxFitness);
                 }
                 else
                 {
@@ -134,7 +132,6 @@ public class player : MonoBehaviour
                 if (health - value > 0)
                 {
                     health -= value;
-                    healthBar.fillAmount = health / level.GetCurrentStat(playerStats.maxHealth);
 
                 }
                 else
@@ -190,10 +187,19 @@ public class player : MonoBehaviour
         print(hit);
         if (hit.collider != null)
         {
-     //       hit.collider.gameObject.GetComponent<Enemy>().ReceiveDamage(level.getCurrentStat(playerStats.damage) + extraDamage);
-            print("damaged enemy" + (level.GetCurrentStat(playerStats.damage) + extraDamage));
+            hit.collider.gameObject.GetComponent<Enemy>().ReceiveDamage((int)(level.getCurrentStat(playerStats.damage) + extraDamage));
+            print("damaged enemy" + (level.getCurrentStat(playerStats.damage) + extraDamage));
         }
         yield return new WaitForSecondsRealtime((5000 - level.GetCurrentStat(playerStats.attackCooldown)) / 1000);
         readToAttack = true;
+    }
+
+    public float getHealth()
+    {
+        return health;
+    }
+    public float getFitness()
+    {
+        return fitness;
     }
 }
