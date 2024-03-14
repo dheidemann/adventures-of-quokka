@@ -1,17 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public enum statType
+public enum StatType
 {
     fitness,
     health
 }
 
-public class player : MonoBehaviour
+public class Player : MonoBehaviour
 {
+    public static Player Instance;
+
     public Image fitnessBar;
 
     public Image healthBar;
@@ -40,6 +41,10 @@ public class player : MonoBehaviour
 
     private Animator GUIAnimator;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -62,7 +67,7 @@ public class player : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward * 5f, Color.red);
         if (Input.GetKeyDown(KeyCode.E) && readToAttack)
         {
-            StartCoroutine(attack());
+            StartCoroutine(Attack());
 
         }
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -77,7 +82,7 @@ public class player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl) && CheckFitness())
         {
             rb.MovePosition(rb.position + movement * level.GetCurrentStat(playerStats.sprintSpeed) * Time.fixedDeltaTime);
-            decreaseStat(statType.fitness, 0.5f);
+            DecreaseStat(StatType.fitness, 0.5f);
             sprinting = true;
         }
         else
@@ -86,16 +91,16 @@ public class player : MonoBehaviour
             sprinting = false;
             if (!regenerating && CheckFitness())
             {
-                StartCoroutine(regenerate(fitness, false));
+                StartCoroutine(Regenerate(fitness, false));
             }
         }
     }
 
-    public void increaseStat(statType type, float value)
+    public void IncreaseStat(StatType type, float value)
     {
         switch (type)
         {
-            case statType.fitness:
+            case StatType.fitness:
                 if (fitness + value < level.GetCurrentStat(playerStats.maxFitness))
                 {
                     fitness += value;
@@ -105,7 +110,7 @@ public class player : MonoBehaviour
                     fitness = level.GetCurrentStat(playerStats.maxFitness);           
                 }
                 break;
-            case statType.health:
+            case StatType.health:
                 if (health + value < level.GetCurrentStat(playerStats.maxHealth))
                 {
                     health += value;
@@ -118,11 +123,11 @@ public class player : MonoBehaviour
         }
     }
 
-    public void decreaseStat(statType type, float value)
+    public void DecreaseStat(StatType type, float value)
     {
         switch (type)
         {
-            case statType.fitness:
+            case StatType.fitness:
                 if ((int)(fitness - value) > 0)
                 {
                     fitness -= value;
@@ -130,10 +135,10 @@ public class player : MonoBehaviour
                 else
                 {
                     fitness = 0;
-                    StartCoroutine(regenerate(fitness, true));
+                    StartCoroutine(Regenerate(fitness, true));
                 }
                 break;
-            case statType.health:
+            case StatType.health:
                 animator.SetTrigger("hurtTrigger");
                 if (health - value > 0)
                 {
@@ -143,7 +148,7 @@ public class player : MonoBehaviour
                 else
                 {
                     health = 0;
-                    die();
+                    Die();
                 }
                 break;
         }
@@ -170,13 +175,13 @@ public class player : MonoBehaviour
         }
     }
 
-    public void die()
+    public void Die()
     {
         level.DecreaseLevel();
         SceneManager.LoadScene("deathScreen");
     }
 
-    IEnumerator regenerate(float currentFitness, bool empty)
+    IEnumerator Regenerate(float currentFitness, bool empty)
     {
         regenerating = true;
         if (empty)
@@ -189,12 +194,12 @@ public class player : MonoBehaviour
         }
         while (fitness >= currentFitness && fitness < level.GetCurrentStat(playerStats.maxFitness) && !sprinting)
         {
-            increaseStat(statType.fitness, 0.04f);
+            IncreaseStat(StatType.fitness, 0.04f);
             yield return new WaitForSecondsRealtime(0.01f);
         }
         regenerating = false;
     }
-    IEnumerator attack()
+    IEnumerator Attack()
     {
         float localAttackCooldown = (5000 - level.GetCurrentStat(playerStats.attackCooldown)) / 1000;
         readToAttack = false;
@@ -203,20 +208,17 @@ public class player : MonoBehaviour
         GUIAnimator.SetFloat("cooldown", 1 / localAttackCooldown);
         GUIAnimator.SetTrigger("pressedTrigger");
 
-        if (hit.collider != null)
-        {
-            hit.collider.gameObject.GetComponent<Enemy>().ReceiveDamage(level.GetCurrentStat(playerStats.damage) + extraDamage);
-        }
+        hit.collider?.gameObject.GetComponent<Enemy>().ReceiveDamage(level.GetCurrentStat(playerStats.damage) + extraDamage);
         yield return new WaitForSecondsRealtime(localAttackCooldown);
         print("ready to attack");
         readToAttack = true;
     }
 
-    public float getHealth()
+    public float GetHealth()
     {
         return health;
     }
-    public float getFitness()
+    public float GetFitness()
     {
         return fitness;
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,12 +6,16 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
-    public List<Item> itemList = new List<Item>();
-    public EquipableItem weapon;
-    public EquipableItem armor;
+    public List<Item> itemList = new();
 
+    private EquipableItem weapon;
+    private EquipableItem armor;
+
+    public GameObject weaponField;
+    public GameObject armorField;
     public Transform inventoryContent;
     public GameObject inventoryItemTemplate;
+    public Sprite defaultIcon;
 
     private void Awake()
     {
@@ -56,7 +61,22 @@ public class InventoryManager : MonoBehaviour
     }
 
     public void Drop(Item collectableItem)
-    {}
+    {
+        Remove(collectableItem);
+    }
+
+    private void SetIconOn(GameObject inventoryItem, Sprite icon) 
+    {
+        var itemIcon = inventoryItem.transform.Find("ItemIcon").GetComponent<Image>();
+        if (icon != null) 
+        {
+            itemIcon.sprite = icon;
+        }
+        else
+        {
+            itemIcon.sprite = defaultIcon;
+        }
+    }
 
     public void ListItems()
     {
@@ -69,16 +89,35 @@ public class InventoryManager : MonoBehaviour
 
         foreach (var collectableItem in itemList)
         {
-            GameObject obj = Instantiate(inventoryItemTemplate, inventoryContent);
-            var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
-            itemIcon.sprite = collectableItem.icon; 
+            GameObject inventoryItem = Instantiate(inventoryItemTemplate, inventoryContent);
+            SetIconOn(inventoryItem, collectableItem.icon);
+
+            Button button = inventoryItem.GetComponent<Button>();
+            button.onClick.AddListener(() => HandleItemClick(collectableItem));
         }
+        
+        SetIconOn(weaponField, weapon?.icon);
+        SetIconOn(armorField, armor?.icon);
     }
 
     public void Consume(ConsumableItem collectableItem)
     {
-        // Player.heal(collectableItem.heals)
+        Player.Instance.IncreaseStat(StatType.health, collectableItem.heals);
         Remove(collectableItem);
+    }
+
+    public void HandleItemClick(Item clickedItem)
+    {
+        if (clickedItem is EquipableItem equipableItem)
+        {
+            Equip(equipableItem);
+        }
+        else if (clickedItem is ConsumableItem consumableItem)
+        {
+            Consume(consumableItem);
+        }
+
+        ListItems();
     }
 
 }

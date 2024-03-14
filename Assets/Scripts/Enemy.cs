@@ -32,7 +32,7 @@
 
     IEnumerator Attack(int attackCooldown, int damage) {
         animator.SetTrigger("attackTrigger");
-        player.GetComponent<player>().decreaseStat(statType.health, damage); 
+        player.GetComponent<Player>().DecreaseStat(StatType.health, damage); 
         attacked = true;
         yield return new WaitForSecondsRealtime(attackCooldown);
         attacked = false;
