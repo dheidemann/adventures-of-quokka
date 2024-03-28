@@ -15,39 +15,35 @@ public class PlayerTests
     public void TestIncreaseStat()
     {
         Player player = new Player();
-        int tempFitness = player.fitness;
+        player.testStart();
+        player.DecreaseStat(StatType.fitness, 10);
+        float tempFitness = player.GetFitness();
         player.IncreaseStat(StatType.fitness, 1);
-        Assert.AreEqual(player.fitness, tempFitness+1);
+        Assert.AreEqual(player.GetFitness(), tempFitness+1);
     }
 
     [Test]
     public void TestDecreaseStat() {
         Player player = new Player();
-        int tempHealth = player.health;
+        player.testStart();
+        float tempHealth = player.GetHealth();
         player.DecreaseStat(StatType.health, 1);
-        Assert.AreEqual(player.health, tempHealth-1);
-    }
-    
-    [Test]
-    public void TestCheckFitness(){ 
-        Player player = new Player();
-        Assert.IsTrue(player.CheckFitness());
-        player.DecreaseStat(StatType.fitness, 100);
-        Assert.IsFalse(player.CheckFitness());
+        Assert.AreEqual(player.GetHealth(), tempHealth-1);
     }
 
     [Test]
     public void TestRegenerate(){
         Player player = new Player();
+        player.testStart();
         player.DecreaseStat(StatType.fitness, 90);
-        Assert.AreEqual(player.fitness, 10);
-        float tempFitness = player.fitness;
-        Assert.IsTrue(tempFitness<=player.fitness);
-        Assert.IsTrue(player.fitness < player.level.GetCurrentStat(playerStats.maxFitness));
-        Assert.IsFalse(sprinting);
-        player.StartCoroutine(Regenerate(player.fitness, false));
-        Assert.AreEqual(player.fitness, 100);
-        Assert.IsFalse(player.regenerating);
+        Assert.AreEqual(player.GetFitness(), 10);
+        float tempFitness = player.GetFitness();
+        Assert.IsTrue(tempFitness<=player.GetFitness());
+        Assert.IsTrue(player.GetFitness() < player.GetLevel().GetCurrentStat(playerStats.maxFitness));
+        Assert.IsFalse(player.IsSprinting());
+        player.startRegenerate(false);
+        Assert.AreEqual(player.GetFitness(), 100);
+        Assert.IsFalse(player.IsRegenerating());
     }
 
    

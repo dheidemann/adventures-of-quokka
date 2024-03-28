@@ -221,4 +221,24 @@ public class Player : MonoBehaviour
     {
         return fitness;
     }
+
+    public Levels GetLevel(){
+        return level;
+    }
+
+    public bool IsSprinting(){
+        return sprinting;
+    }
+
+    public bool IsRegenerating(){
+        return regenerating;
+    }
+
+    public void startRegenerate(bool empty){
+        StartCoroutine(Regenerate(fitness, empty));
+    }
+
+    public void testStart(){
+        Start();
+    }
 }
