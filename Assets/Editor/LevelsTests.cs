@@ -8,7 +8,7 @@ using UnityEngine.TestTools;
 
 [TestFixture]
 public class LevelsTests {
-    // Tests Req 2.2.3.1.1 Klasse Levels
+    // Tests Req 2.2.3.1.2 Klasse Levels
     
     [Test]
     public void TestDecreaseLevel(){

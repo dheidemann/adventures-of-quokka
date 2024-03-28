@@ -5,6 +5,7 @@ using UnityEngine;
 
 public enum playerStats
 {
+    // implementiert Req 2.2.3.1.1 Enum playerStats
     maxHealth,
     maxFitness,
     numberAttacks,
@@ -21,7 +22,7 @@ public enum playerStats
 
 public class Levels
 {
-    //implementiert Req 2.2.3.1.1 Klasse Levels
+    //implementiert Req 2.2.3.1.2 Klasse Levels
     private int level; // saves current player Level
     private Dictionary<(int, playerStats), int> LevelStats; //saves Overview about Stats at different Levels
 

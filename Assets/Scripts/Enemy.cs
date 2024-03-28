@@ -42,18 +42,27 @@
 
     public void Update(){
         // Wenn Distanz auf x & y Achse zu Player kleiner als followRange -> setze isFollowing auf true und ruf Methode followPlayer() auf
-        if (Vector2.Distance(new Vector2(player.transform.position.x, player.transform.position.y), new Vector2(transform.position.x, transform.position.y)) <= followRange) {
-        isFollowing = true; 
-        FollowPlayer();
+        if (CheckRange(followRange)) {
+            isFollowing = true; 
+            FollowPlayer();
+
+            // Wenn Distanz außerdem kleiner ist als die attackRange & der Gegner noch nicht angegriffen oder der attackCooldown abgelaufen ist,  greif Spieler an 
+            if(CheckRange(attackRange) && attacked == false){
+                StartCoroutine(Attack(attackCooldown, damage));
+            }
         }
         // else isFollowing = false, da out of range; 
         else {
             isFollowing = false; 
         }
-        //  Wenn Distanz auf x & y Achse zu Player kleiner als attackRange -> greif Player an
-        if(Vector2.Distance(new Vector2(player.transform.position.x, player.transform.position.y), new Vector2(transform.position.x, transform.position.y)) <= attackRange && attacked == false){
-                StartCoroutine(Attack(attackCooldown, damage));
-            }
+    }
+
+    //Vergleicht die Distanz zwischen Spieler und Enenmy mit der eingegeben Range zb attackRange oder followRange 
+    public bool CheckRange(int range){
+        if(Vector2.Distance(new Vector2(player.transform.position.x, player.transform.position.y), new Vector2(transform.position.x, transform.position.y)) <= range) {
+            return true; 
+        }
+        return false; 
     }
 
     public void FollowPlayer(){
@@ -77,9 +86,8 @@
     }
 
     public void Die(){
-        //TODO: Bluteffekt 
+        // Enemy dies, with particle effect, dropping loot and destroying the game object  
         ParticleSystem instantiatedEffect = Instantiate(deathEffect, transform.position, Quaternion.identity);
-        // Play the effect
         instantiatedEffect.Play();
         DropLoot(); 
         Destroy(this.gameObject);
