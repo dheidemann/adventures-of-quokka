@@ -64,7 +64,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(transform.position, transform.forward * 5f, Color.red);
         if (Input.GetKeyDown(KeyCode.E) && readToAttack)
         {
             StartCoroutine(Attack());
@@ -221,5 +220,25 @@ public class Player : MonoBehaviour
     public float GetFitness()
     {
         return fitness;
+    }
+
+    public Levels GetLevel(){
+        return level;
+    }
+
+    public bool IsSprinting(){
+        return sprinting;
+    }
+
+    public bool IsRegenerating(){
+        return regenerating;
+    }
+
+    public void startRegenerate(bool empty){
+        StartCoroutine(Regenerate(fitness, empty));
+    }
+
+    public void testStart(){
+        Start();
     }
 }
