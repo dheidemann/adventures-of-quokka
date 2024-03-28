@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/intro_02.unity
     guid: a1286a76736b4fe4f90db329c7c4ebd7
   - enabled: 1
+    path: Assets/Scenes/part1_cave.unity
+    guid: 18a4f6e0f8c2411c8bfe469ffa79c151
+  - enabled: 1
     path: Assets/Scenes/game.unity
     guid: 259c1176ecf32b34abb0a3130d94752f
   - enabled: 1
