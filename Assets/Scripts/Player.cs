@@ -64,7 +64,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(transform.position, transform.forward * 5f, Color.red);
         if (Input.GetKeyDown(KeyCode.E) && readToAttack)
         {
             StartCoroutine(Attack());
