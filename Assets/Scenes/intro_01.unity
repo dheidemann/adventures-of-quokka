@@ -272,6 +272,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 072a0127ce2426f2f9dda0b92883d847, type: 3}
+--- !u!1 &70430236 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8703658809688597223, guid: 072a0127ce2426f2f9dda0b92883d847, type: 3}
+  m_PrefabInstance: {fileID: 1953107745}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &73744333
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -373,6 +378,11 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4956029061650866847, guid: 072a0127ce2426f2f9dda0b92883d847, type: 3}
   m_PrefabInstance: {fileID: 73744333}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &119830411 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8703658809688597223, guid: 072a0127ce2426f2f9dda0b92883d847, type: 3}
+  m_PrefabInstance: {fileID: 50714131}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &331949001
 GameObject:
@@ -16951,11 +16961,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemList: []
-  weaponField: {fileID: 0}
-  armorField: {fileID: 0}
+  weaponField: {fileID: 119830411}
+  armorField: {fileID: 70430236}
   inventoryContent: {fileID: 951973986}
   inventoryItemTemplate: {fileID: 8703658809688597223, guid: 072a0127ce2426f2f9dda0b92883d847, type: 3}
-  defaultIcon: {fileID: 0}
+  defaultIcon: {fileID: 21300000, guid: 901846389b58429248eb9598ea48c2d8, type: 3}
 --- !u!4 &1797767214
 Transform:
   m_ObjectHideFlags: 0
