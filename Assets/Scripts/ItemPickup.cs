@@ -11,6 +11,10 @@ public class ItemPickup : MonoBehaviour
     {
         InventoryManager.Instance.Add(Item);
         Destroy(gameObject);
+        if (Item is EquipableItem && !InventoryManager.Instance.IsArmed())
+        {
+            InventoryManager.Instance.PerformItemFunction(Item);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

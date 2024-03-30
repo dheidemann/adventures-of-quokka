@@ -11,5 +11,6 @@ public class EquipableItem : Item
 {
     public int resists;
     public int damage;
+    public Sprite equipedIcon;
     public EquipableType type;
 }

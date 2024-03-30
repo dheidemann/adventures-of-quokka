@@ -41,6 +41,8 @@ public class Player : MonoBehaviour
 
     private Animator GUIAnimator;
 
+    public GameObject equipedWeapon;
+
     private void Awake()
     {
         Instance = this;
@@ -213,6 +215,12 @@ public class Player : MonoBehaviour
         readToAttack = true;
     }
 
+    public void SetWeapon(EquipableItem weapon)
+    {
+        var weaponIcon = transform.Find("Weapon").GetComponent<SpriteRenderer>();
+        weaponIcon.sprite = weapon.equipedIcon;
+    }
+
     public float GetHealth()
     {
         return health;
@@ -234,11 +242,11 @@ public class Player : MonoBehaviour
         return regenerating;
     }
 
-    public void startRegenerate(bool empty){
+    public void StartRegenerate(bool empty){
         StartCoroutine(Regenerate(fitness, empty));
     }
 
-    public void testStart(){
+    public void TestStart(){
         Start();
     }
 }

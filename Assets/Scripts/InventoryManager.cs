@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditorInternal.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,6 +43,8 @@ public class InventoryManager : MonoBehaviour
                 break;
             case EquipableType.Weapon: 
                 weapon = collectableItem;
+                Player.Instance.IncreaseExtraDamage(collectableItem.damage);
+                Player.Instance.SetWeapon(collectableItem);
                 break;
         }            
         Remove(collectableItem);
@@ -56,6 +59,7 @@ public class InventoryManager : MonoBehaviour
                 break;
             case EquipableType.Weapon: 
                 weapon = null;
+                Player.Instance.DecreaseExtraDamage(collectableItem.damage);
                 break;
         }
         Add(collectableItem);
@@ -93,8 +97,7 @@ public class InventoryManager : MonoBehaviour
             GameObject inventoryItem = Instantiate(inventoryItemTemplate, inventoryContent);
             SetIconOn(inventoryItem, collectableItem.icon);
 
-            Button button = inventoryItem.GetComponent<Button>();
-            button.onClick.AddListener(() => HandleItemClick(collectableItem));
+            HandleItemClick(inventoryItem, collectableItem);
         }
         
         SetIconOn(weaponField, weapon?.icon);
@@ -107,7 +110,13 @@ public class InventoryManager : MonoBehaviour
         Remove(collectableItem);
     }
 
-    public void HandleItemClick(Item clickedItem)
+    public void HandleItemClick(GameObject gameObject, Item collectableItem) 
+    {
+        Button button = gameObject.GetComponent<Button>();
+        button.onClick.AddListener(() => PerformItemFunction(collectableItem));
+    }
+
+    public void PerformItemFunction(Item clickedItem)
     {
         if (clickedItem is EquipableItem equipableItem)
         {
@@ -119,6 +128,11 @@ public class InventoryManager : MonoBehaviour
             Consume(consumableItem);
             ListItems();
         }
+    }
+
+    public bool IsArmed() {
+        if (weapon == null) return false;
+        return true;
     }
 
 }
