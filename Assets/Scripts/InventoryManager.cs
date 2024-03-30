@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditorInternal.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -111,13 +112,13 @@ public class InventoryManager : MonoBehaviour
         if (clickedItem is EquipableItem equipableItem)
         {
             Equip(equipableItem);
+            ListItems();
         }
         else if (clickedItem is ConsumableItem consumableItem)
         {
             Consume(consumableItem);
+            ListItems();
         }
-
-        ListItems();
     }
 
 }

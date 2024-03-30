@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Poison
-  m_EditorClassIdentifier: Assembly-CSharp::ConsumableItem
-  id: 0
-  itemName: 
-  icon: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 1067ad99c861a653fa640aa5c6b20c18, type: 3}
+  m_Name: Steak
+  m_EditorClassIdentifier: 
+  id: 2
+  itemName: Steak
+  icon: {fileID: 21300000, guid: 3c6eb0458ace23e40bf97482d343a201, type: 3}
   collected: 0
-  heals: 0
+  heals: 30
